@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:covid19_test/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as GetX;
 import 'package:path_provider/path_provider.dart';
@@ -92,7 +93,6 @@ class CheckController extends GetX.GetxController {
   Future<void> submitCheck() async {
     try {
       final filePath = coughFile.value;
-      const url = 'http://192.168.1.2:5000/predict';
       final dio = Dio();
       final formData = FormData.fromMap({
             'file': await MultipartFile.fromFile(filePath, filename: coughFile.value
@@ -110,7 +110,7 @@ class CheckController extends GetX.GetxController {
             'nausea_or_vomiting': nausea_or_vomiting.value,
           });
       isLoading.value = true;
-      final response = await dio.post(url, data: formData);
+      final response = await dio.post(apiURL, data: formData);
       responseHandler(response);
     } catch (e) {
       GetX.Get.snackbar('Error', e.toString() ,
