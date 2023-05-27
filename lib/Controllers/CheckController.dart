@@ -37,6 +37,8 @@ class CheckController extends GetX.GetxController {
   var coughFile = ''.obs;
   var isLoading = false.obs;
 
+  var isRecheck = false.obs;
+
   @override
   Future<void> onInit() async {
     // await createFolder('Coughs');
@@ -108,6 +110,7 @@ class CheckController extends GetX.GetxController {
             'congestion_or_runny_nose': congestion_or_runny_nose.value,
             'sore_throat': sore_throat.value,
             'nausea_or_vomiting': nausea_or_vomiting.value,
+            'is_recheck': isRecheck.value,
           });
       isLoading.value = true;
       final response = await dio.post(apiURL, data: formData);
@@ -135,6 +138,7 @@ class CheckController extends GetX.GetxController {
       }
       else if (code == 2) {
         canSubmit.value = false;
+        isRecheck.value = true;
         GetX.Get.snackbar('Error', 'Please provide another cough test',
             backgroundColor: Colors.orangeAccent,
             colorText: Colors.white,
