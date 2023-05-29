@@ -39,7 +39,10 @@ class ResultPage extends StatelessWidget {
               height: 30,
             ),
 
-            Text(result, style: const TextStyle(fontSize: 20), textAlign: TextAlign.center,),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(result, style: const TextStyle(fontSize: 20), textAlign: TextAlign.center,),
+            ),
 
             const SizedBox(
               height: 30,

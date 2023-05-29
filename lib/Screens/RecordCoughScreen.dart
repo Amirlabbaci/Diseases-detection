@@ -1,7 +1,6 @@
 import 'package:covid19_test/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../Controllers/CheckController.dart';
 
 class RecordCoughScreen extends StatefulWidget {
@@ -44,16 +43,36 @@ class _RecordCoughScreenState extends State<RecordCoughScreen> {
                     width: 160,
                     height: 160,
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+
                 ],
               ),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RecordingIndicatorWidget(),
-                    const SizedBox(
-                      height: 20,
+                    const RecordingIndicatorWidget(),
+                    Obx(
+                          () => controller.recordProgress.value > 0 ? Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        width: 200,
+                        height: 20,
+                        child:  ClipRRect(
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          child: LinearProgressIndicator(
+                            value: controller.recordProgress.value,
+                            valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
+                            backgroundColor: const Color(0xffD6D6D6),
+                          ),
+                        ),
+                      ) : const SizedBox(),
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+
                     // rounded button to record cough
                     Container(
                       width: 200,
@@ -85,6 +104,10 @@ class _RecordCoughScreenState extends State<RecordCoughScreen> {
                         ),
                       ),
                     ),
+
+
+
+
                     const SizedBox(
                       height: 60,
                     ),
@@ -108,7 +131,7 @@ class _RecordCoughScreenState extends State<RecordCoughScreen> {
                                 }
                               : null,
                           child: controller.isLoading.value
-                              ? Container(width: 20, height: 20,child: const CircularProgressIndicator(color: Colors.white, strokeWidth: 2,) ,)
+                              ? const SizedBox(width: 20, height: 20,child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2,) ,)
                               : const Text(
                                   'Check',
                                   style: TextStyle(
@@ -131,6 +154,8 @@ class _RecordCoughScreenState extends State<RecordCoughScreen> {
 }
 
 class RecordingIndicatorWidget extends StatefulWidget {
+  const RecordingIndicatorWidget({super.key});
+
   @override
   _RecordingIndicatorWidgetState createState() =>
       _RecordingIndicatorWidgetState();

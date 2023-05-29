@@ -2,7 +2,6 @@ import 'package:covid19_test/Constants.dart';
 import 'package:covid19_test/Screens/RecordCoughScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:record/record.dart';
 
 import '../Controllers/CheckController.dart';
 
@@ -158,7 +157,7 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Get.to(RecordCoughScreen() , transition: Transition.rightToLeft);
+                          Get.to(const RecordCoughScreen() , transition: Transition.rightToLeft);
                         },
                         child: const Padding(
                           padding: EdgeInsets.symmetric(

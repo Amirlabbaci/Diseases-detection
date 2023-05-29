@@ -1,23 +1,14 @@
-import 'dart:io';
+import 'dart:async';
 import 'dart:math';
-
 import 'package:covid19_test/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as GetX;
-import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:dio/dio.dart';
-// import Environment from 'android.os.Environment';
-
-import 'dart:io' as io;
-
 import '../Screens/ResultPage.dart';
 
 class CheckController extends GetX.GetxController {
-  // var recorderController = RecorderController().obs;
-  //
-  // var playerController = PlayerController().obs;
 
   var fever_or_chills = false.obs;
   var shortness_of_breath = false.obs;
@@ -30,14 +21,17 @@ class CheckController extends GetX.GetxController {
   var nausea_or_vomiting = false.obs;
 
   final record = Record();
-  var elapsingTime = 0.obs;
   var isRecording = false.obs;
 
   var canSubmit = false.obs;
+
   var coughFile = ''.obs;
+
   var isLoading = false.obs;
 
   var isRecheck = false.obs;
+  var recordProgress = 0.0.obs;
+
 
   @override
   Future<void> onInit() async {
@@ -47,9 +41,11 @@ class CheckController extends GetX.GetxController {
 
   Future<void> recordAudio() async {
     // set 5 seconds to record
+    recordProgress.value = 0.0;
+    determinateIndicator();
     isRecording.value = true;
     recordCough();
-    var future = Future.delayed(const Duration(seconds: 2), stopRecoring);
+    Future.delayed(const Duration(seconds: coughDuration), stopRecoring);
   }
 
   Future<void> recordCough() async {
@@ -130,6 +126,7 @@ class CheckController extends GetX.GetxController {
   void responseHandler(Response response) {
     if (response.statusCode == 200) {
       final code = response.data['code'];
+
       if (code == 0 || code == 1) {
         GetX.Get.offAll(() => ResultPage(
             code: code,
@@ -139,6 +136,7 @@ class CheckController extends GetX.GetxController {
       else if (code == 2) {
         canSubmit.value = false;
         isRecheck.value = true;
+        recordProgress.value = 0.0;
         GetX.Get.snackbar('Error', 'Please provide another cough test',
             backgroundColor: Colors.orangeAccent,
             colorText: Colors.white,
@@ -155,4 +153,23 @@ class CheckController extends GetX.GetxController {
   }
 
 
+  void determinateIndicator(){
+
+    const totalSteps = 100; // Increase the number of steps for smoother progress
+    const stepDuration = coughDuration / totalSteps;
+    const stepValue = 1 / totalSteps;
+
+    Timer.periodic(
+      Duration(milliseconds: (stepDuration * 1000).toInt()),
+          (Timer timer) {
+        if (recordProgress.value >= 1) {
+          timer.cancel();
+        } else {
+          recordProgress.value += stepValue;
+        }
+      },
+    );
+
+
+  }
 }

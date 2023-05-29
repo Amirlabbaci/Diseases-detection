@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../main.dart';
 import 'GetStartedScreen.dart';
 class CovidPreventionScreen extends StatelessWidget {
   const CovidPreventionScreen({super.key});
