@@ -2,8 +2,8 @@ import 'package:covid19_test/Screens/CovidInfectedAdviceScreen.dart';
 import 'package:covid19_test/Screens/CovidPreventionScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-class ResultPage extends StatelessWidget {
-   const ResultPage({Key? key,  required this.code, required this.result})
+class CovidResultPage extends StatelessWidget {
+   const CovidResultPage({Key? key,  required this.code, required this.result})
       : super(key: key);
   final int code;
   final String result;

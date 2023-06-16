@@ -2,11 +2,14 @@ import 'package:covid19_test/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Controllers/SkinController.dart';
 import 'SkinScreen.dart';
 import 'Symptoms.dart';
 
 class SkinScreen extends StatelessWidget {
-  const SkinScreen({Key? key}) : super(key: key);
+   SkinScreen({Key? key}) : super(key: key);
+
+  final controller = Get.put(SkinController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +22,25 @@ class SkinScreen extends StatelessWidget {
               image: AssetImage('assets/dry-skin.png'),
               width: 180,
               height: 300,
+
             ),
-            Column(
-              children: [
-                CustomButton(text: 'Take image', onPressed: () {
-                  Get.to(const SymptomsScreen() , transition: Transition.rightToLeft);
-                }),
-                const SizedBox(
-                  height: 60,
-                ),
-              ],
+            Obx(
+              ()=> Column(
+                children: [
+                  controller.isLoading.value ? const Text('Waiting for result ...' , style: TextStyle(fontSize: 18),) : const SizedBox(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomButton(text: 'Take image', onPressed: () {
+                    controller.takeImage();
+                    // Get.to(const SymptomsScreen() , transition: Transition.rightToLeft);
+
+                  }),
+                  const SizedBox(
+                    height: 60,
+                  ),
+                ],
+              ),
             )
           ],
         ),
@@ -47,7 +59,7 @@ class SkinScreen extends StatelessWidget {
             color: primaryColor,
             borderRadius: BorderRadius.circular(40)),
         child: Center(
-          child: Text(
+          child: controller.isLoading.value ? const SizedBox(height: 30,width: 30,child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5) ,) : Text(
             text!,//! not null text
             style: const TextStyle(
                 fontSize: 18,

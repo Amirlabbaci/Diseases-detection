@@ -15,10 +15,18 @@ class Checktype extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            const Image(
-              image: AssetImage('assets/examination.png'),
-              width: 180,
-              height: 300,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                SizedBox(
+                  width: 60,
+                ),
+                Image(
+                  image: AssetImage('assets/examination.png'),
+                  width: 180,
+                  height: 300,
+                ),
+              ],
             ),
             Column(
               children: [
@@ -32,7 +40,7 @@ class Checktype extends StatelessWidget {
                   height: 60,
                 ),
                 CustomButton(text: 'Skin Check', onPressed: () {
-                  Get.to(const SkinScreen(), transition: Transition.rightToLeft);
+                  Get.to( SkinScreen(), transition: Transition.rightToLeft);
                 }),
               ],
             )

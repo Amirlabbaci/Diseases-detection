@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:dio/dio.dart';
-import '../Screens/ResultPage.dart';
+import '../Screens/CovidResultPage.dart';
 
 class CheckController extends GetX.GetxController {
 //to control the logic and state
@@ -132,7 +132,7 @@ class CheckController extends GetX.GetxController {
       final code = response.data['code'];
 
       if (code == 0 || code == 1) {
-        GetX.Get.offAll(() => ResultPage(
+        GetX.Get.offAll(() => CovidResultPage(
             code: code,
             result: response.data['result'],
             ) , transition: GetX.Transition.zoom);
