@@ -1,13 +1,12 @@
 import 'package:covid19_test/Constants.dart';
-import 'package:covid19_test/Screens/Checktype.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'Motivation.dart';
+import 'SkinScreen.dart';
 import 'Symptoms.dart';
 
-class GetStartedScreen extends StatelessWidget {
-  const GetStartedScreen({Key? key}) : super(key: key);
+class SkinScreen extends StatelessWidget {
+  const SkinScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,23 +16,18 @@ class GetStartedScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             const Image(
-              image: AssetImage('assets/covid.png'),
-              width: 160,
-              height: 160,
+              image: AssetImage('assets/dry-skin.png'),
+              width: 180,
+              height: 300,
             ),
-
             Column(
               children: [
-                CustomButton(text: 'Motivation', onPressed: () {
-                  Get.to(const MotivationScreen(), transition: Transition.rightToLeft);
+                CustomButton(text: 'Take image', onPressed: () {
+                  Get.to(const SymptomsScreen() , transition: Transition.rightToLeft);
                 }),
-
                 const SizedBox(
                   height: 60,
                 ),
-                CustomButton(text: 'Check', onPressed: () {
-                  Get.to(const Checktype() , transition: Transition.rightToLeft);
-                }),
               ],
             )
           ],

@@ -3,13 +3,15 @@ import 'dart:math';
 import 'package:covid19_test/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as GetX;
+import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:dio/dio.dart';
 import '../Screens/ResultPage.dart';
 
 class CheckController extends GetX.GetxController {
-
+//to control the logic and state
+//observer
   var fever_or_chills = false.obs;
   var shortness_of_breath = false.obs;
   var fatigue = false.obs;
@@ -35,11 +37,13 @@ class CheckController extends GetX.GetxController {
 
   @override
   Future<void> onInit() async {
+    //
     // await createFolder('Coughs');
     super.onInit();
   }
 
   Future<void> recordAudio() async {
+    //record audio for the COVID-19 check
     // set 5 seconds to record
     recordProgress.value = 0.0;
     determinateIndicator();
@@ -50,12 +54,11 @@ class CheckController extends GetX.GetxController {
 
   Future<void> recordCough() async {
     canSubmit.value = false;
-    // final dir = await getExternalStorageDirectory();
-    // final filePath = '${dir?.path}/cough_${generateRandomFileName()}.wav';
+    final dir = await getExternalStorageDirectory();
+    final filePath='${dir?.path}/cough_${generateRandomFileName()}.wav';
+    //final filePath = '/storage/emulated/0/Documents/cough_${generateRandomFileName()}.wav';
 
-    final filePath = '/storage/emulated/0/Documents/cough_${generateRandomFileName()}.wav';
     coughFile.value = filePath;
-
     await Permission.microphone.request();
     await Permission.storage.request();
     if (await record.hasPermission()) {
@@ -92,6 +95,7 @@ class CheckController extends GetX.GetxController {
     try {
       final filePath = coughFile.value;
       final dio = Dio();
+      //HTTP client for making API requests
       final formData = FormData.fromMap({
             'file': await MultipartFile.fromFile(filePath, filename: coughFile.value
                 .split('/')

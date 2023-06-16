@@ -14,9 +14,10 @@ class SymptomsScreen extends StatefulWidget {
 
 class _SymptomsScreenState extends State<SymptomsScreen> {
   final controller = Get.put(CheckController());
-
+//The CheckController is a custom controller responsible for managing the state of the checkboxes used to check symptoms.
   @override
   Widget build(BuildContext context) {
+    //The Obx widget is used from GetX to observe changes in the state of the
     return Obx(
       () => Scaffold(
         body: SafeArea(

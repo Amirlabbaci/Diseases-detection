@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-
+// build the UI of the home page
   @override
   Widget build(BuildContext context) {
     return const GetStartedScreen();

@@ -12,7 +12,7 @@ class RecordCoughScreen extends StatefulWidget {
 
 class _RecordCoughScreenState extends State<RecordCoughScreen> {
   final controller = Get.find<CheckController>();
-
+//The CheckController is a custom controller responsible for managing the state of the recording process and the progress indicator.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +46,6 @@ class _RecordCoughScreenState extends State<RecordCoughScreen> {
                   SizedBox(
                     height: 20,
                   ),
-
                 ],
               ),
               Expanded(
@@ -55,19 +54,24 @@ class _RecordCoughScreenState extends State<RecordCoughScreen> {
                   children: [
                     const RecordingIndicatorWidget(),
                     Obx(
-                          () => controller.recordProgress.value > 0 ? Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        width: 200,
-                        height: 20,
-                        child:  ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
-                          child: LinearProgressIndicator(
-                            value: controller.recordProgress.value,
-                            valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
-                            backgroundColor: const Color(0xffD6D6D6),
-                          ),
-                        ),
-                      ) : const SizedBox(),
+                      () => controller.recordProgress.value > 0
+                          ? Container(
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              width: 200,
+                              height: 20,
+                              child: ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(10)),
+                                child: LinearProgressIndicator(
+                                  value: controller.recordProgress.value,
+                                  valueColor:
+                                      const AlwaysStoppedAnimation<Color>(
+                                          Colors.green),
+                                  backgroundColor: const Color(0xffD6D6D6),
+                                ),
+                              ),
+                            )
+                          : const SizedBox(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -105,9 +109,6 @@ class _RecordCoughScreenState extends State<RecordCoughScreen> {
                       ),
                     ),
 
-
-
-
                     const SizedBox(
                       height: 60,
                     ),
@@ -131,7 +132,14 @@ class _RecordCoughScreenState extends State<RecordCoughScreen> {
                                 }
                               : null,
                           child: controller.isLoading.value
-                              ? const SizedBox(width: 20, height: 20,child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2,) ,)
+                              ? const SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
                               : const Text(
                                   'Check',
                                   style: TextStyle(

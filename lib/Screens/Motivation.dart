@@ -8,14 +8,13 @@ class MotivationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Covid-19 Motivations'),
+        title: const Text(' Diseases Motivation '),
         centerTitle: true,
         backgroundColor: primaryColor,
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
+      body: SingleChildScrollView(// ensures that the content can be scrolled if it exceeds the screen height
+        child: SafeArea(//ensures that the content is displayed within the safe area of the screen
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
@@ -29,10 +28,20 @@ class MotivationScreen extends StatelessWidget {
                   title: 'Covid-19 symptoms',
                   text:
                       'Most common symptoms: fever, dry cough, tiredness. Less common symptoms: aches and pains, sore throat, diarrhoea, conjunctivitis, headache, loss of taste or smell, a rash on skin, or discolouration of fingers or toes. Serious symptoms: difficulty breathing or shortness of breath, chest pain or pressure, loss of speech or movement. Seek immediate medical attention if you have serious symptoms. Always call before visiting your doctor or health facility. People with mild symptoms who are otherwise healthy should manage their symptoms at home. On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days.'),
+
               Section(
-                  title: 'Covid-19 Statistics',
+                  title: 'What is Acne ',
                   text:
-                      'Total Cases: 689,156,586\nTotal Deaths: 6,881,718\nTotal Recovered: 661,552,928\nActive Cases: 20,721,940\nCritical Cases: 38,214\nTotal Tests: 25,66,26,850\nTotal Vaccinations: 12,095,905,035\n'),
+                  'Acne is a common skin condition that happens when hair follicles under the skin become clogged. Sebum—oil that helps keep skin from drying out—and dead skin cells plug the pores, which leads to outbreaks of lesions, commonly called pimples or zits.'),
+              Section(
+                  title: 'Acne Types',
+                  text:
+                  'Whiteheads: Plugged hair follicles that stay beneath the skin and produce a white bump.'
+                      '\nBlackheads: Plugged follicles that reach the surface of the skin and open up. They look black on the skin surface because the air discolors the sebum, not because they are dirty.'
+                      '\nPapules: Inflamed lesions that usually appear as small, pink bumps on the skin and can be tender to the touch.'
+                      '\nPustules or pimples: Papules topped by white or yellow pus-filled lesions that may be red at the base.'
+                      '\nNodules: Large, painful solid lesions that are lodged deep within the skin.'
+                      '\nSevere nodular acne (sometimes called cystic acne): Deep, painful, pus-filled lesions.'),
             ],
           ),
         ),
