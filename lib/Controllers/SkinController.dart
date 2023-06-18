@@ -32,11 +32,16 @@ class SkinController extends GetxController {
           });
           final dio = Dio();
           isLoading.value = true;
-          final res = await  dio.post('http://10.0.2.2:5000/skin', data: formData);
+          final res = await  dio.post('http://134.122.75.238:5000/skin', data: formData);
 
 
           final code = res.data['code'];
           final result = res.data['result'];
+
+          if (code == 3){
+            Get.snackbar('Error', 'Please try again ');
+            return;
+          }
 
           Get.off(SkinResultPage(code: code, result: result));
 
